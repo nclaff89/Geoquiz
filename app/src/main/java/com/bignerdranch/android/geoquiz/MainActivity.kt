@@ -20,13 +20,17 @@ class MainActivity : AppCompatActivity() {
         falseButton = findViewById(R.id.false_button)
 
         trueButton.setOnClickListener { view: View ->
+            //create a toast variable
             val toast: Toast = Toast.makeText(this, R.string.correct_toast, Toast.LENGTH_SHORT)
+            //call set gravity function on the toast variable
             toast.setGravity(Gravity.TOP, Gravity.CENTER, 200)
             toast.show()
         }
 
         falseButton.setOnClickListener { view: View ->
+            //create a toast variable
             val toast: Toast = Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT)
+            //call set gravity function on toast variable
             toast.setGravity(Gravity.TOP, Gravity.CENTER, 200)
             toast.show()
 
