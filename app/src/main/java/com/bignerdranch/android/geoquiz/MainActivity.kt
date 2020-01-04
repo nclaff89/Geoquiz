@@ -17,13 +17,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: Button
     private lateinit var questionTextView: TextView
 
+    /**
+     * CHAPTER 3 challenge 1 set user answer to false initially
+     */
     private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true)
+        Question(R.string.question_australia, true, false),
+        Question(R.string.question_oceans, true, false),
+        Question(R.string.question_mideast, false, false),
+        Question(R.string.question_africa, false, false),
+        Question(R.string.question_americas, true, false),
+        Question(R.string.question_asia, true, false)
 
     )
 
@@ -87,6 +90,9 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion(){
         val questionTextResId = questionBank[currentIndex].textResId
         questionTextView.setText(questionTextResId)
+        //if user submitted answer disable buttons
+        setButtonStatus()
+
     }
 
     private fun checkAnswer(userAnswer: Boolean){
@@ -97,6 +103,22 @@ class MainActivity : AppCompatActivity() {
         }else{
             R.string.incorrect_toast
         }
+        // update answer submitted to true
+        questionBank[currentIndex].answerSubmitted = true
+        setButtonStatus()
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Chapter 3 challenge 1
+     */
+    private fun setButtonStatus(){
+        if(questionBank[currentIndex].answerSubmitted) {
+            trueButton.isEnabled = false
+            falseButton.isEnabled = false
+        }else{
+            trueButton.isEnabled = true
+            falseButton.isEnabled = true
+        }
     }
 }
