@@ -36,6 +36,14 @@ class MainActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.next_button)
         questionTextView = findViewById(R.id.question_text_view)
 
+        /**
+         * Chapter 2 challenge 1
+         */
+        questionTextView.setOnClickListener {
+            currentIndex = (currentIndex + 1) % questionBank.size
+            updateQuestion()
+        }
+
 
         trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
