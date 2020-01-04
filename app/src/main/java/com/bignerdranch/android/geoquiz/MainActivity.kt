@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,11 +13,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
-    private lateinit var nextButton: Button
+
     /**
-     * Chapter 2 challenge 2
+     * Chapter 2 challenge 3
      */
-    private lateinit var prevButton: Button
+    private lateinit var nextButton: ImageButton
+    private lateinit var prevButton: ImageButton
     private lateinit var questionTextView: TextView
 
     private val questionBank = listOf(
@@ -38,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
-        //chap 2 challenge 2
         prevButton = findViewById(R.id.prev_button)
         questionTextView = findViewById(R.id.question_text_view)
 
