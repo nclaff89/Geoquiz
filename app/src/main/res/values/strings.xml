@@ -12,4 +12,7 @@
     <string name="question_africa">The Source of the Nile River is in Egypt.</string>
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+
+    <!-- chapter 3 challenge 2 -->
+    <string name="score">Score: </string>
 </resources>
