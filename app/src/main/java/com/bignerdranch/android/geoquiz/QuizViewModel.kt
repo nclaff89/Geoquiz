@@ -10,6 +10,13 @@ class QuizViewModel: ViewModel() {
 
     var isCheater = false
 
+    /**
+     * Chapter 6 challenge 2
+     * create a set to hold the set of indexes
+     * to the questions that were cheated on.
+     */
+    var cheaterSet = mutableSetOf<Int>()
+
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
         Question(R.string.question_oceans, true),
@@ -19,6 +26,8 @@ class QuizViewModel: ViewModel() {
         Question(R.string.question_asia, true)
 
     )
+
+
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer

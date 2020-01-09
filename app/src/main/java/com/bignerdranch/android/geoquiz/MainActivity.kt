@@ -74,8 +74,12 @@ class MainActivity : AppCompatActivity() {
             return
         }
         if(requestCode == REQUEST_CODE_CHEAT){
-            quizViewModel.isCheater =
-                data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+            /**
+             * Chapter 6 challenge 2
+             */
+//            quizViewModel.isCheater =
+//                data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+            quizViewModel.cheaterSet.add(quizViewModel.currentIndex)
         }
     }
 
@@ -119,7 +123,12 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
         val messageResId = when{
-            quizViewModel.isCheater -> R.string.judgement_toast
+
+            /**
+             * Chapter 6 challenge 2
+             */
+            //quizViewModel.isCheater -> R.string.judgement_toast
+            quizViewModel.cheaterSet.contains(quizViewModel.currentIndex) -> R.string.judgement_toast
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
