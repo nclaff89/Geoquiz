@@ -15,6 +15,11 @@ private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"
 private const val REQUEST_CODE_CHEAT= 0
 
+/**
+ * chapter 7 challenge 2
+ */
+private const val KEY_REMAINING_CHEATS = "remaining_cheats"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var trueButton: Button
@@ -22,6 +27,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: Button
     private lateinit var cheatButton: Button
     private lateinit var questionTextView: TextView
+
+    /**
+     * Chapter 7 challenge 2
+     */
+    private lateinit var cheatsRemainingTV: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
@@ -36,11 +46,25 @@ class MainActivity : AppCompatActivity() {
         val currentIndex = savedInstanceState?.getInt(KEY_INDEX,0) ?: 0
         quizViewModel.currentIndex = currentIndex
 
+        /**
+         * Chapter 7 challenge 2
+         */
+        val currentCheatStatus = savedInstanceState?.getInt(KEY_REMAINING_CHEATS, 0) ?: 3
+        quizViewModel.availableCheats = currentCheatStatus
+
+
+
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
         cheatButton = findViewById(R.id.cheat_button)
         questionTextView = findViewById(R.id.question_text_view)
+
+        /**
+         * Chapter 7 challenge 2
+         */
+        cheatsRemainingTV = findViewById(R.id.cheats_remaining)
+        cheatButtonstatus()
 
 
         trueButton.setOnClickListener { view: View ->
@@ -68,6 +92,16 @@ class MainActivity : AppCompatActivity() {
         updateQuestion()
     }
 
+    /**
+     * Chapter 7 challenge 2
+     */
+    private fun cheatButtonstatus(){
+        cheatButton.isEnabled = quizViewModel.availableCheats > 0
+        var cheatMessage = resources.getString(R.string.cheats_remaining) +
+                " ${quizViewModel.availableCheats}"
+        cheatsRemainingTV.text = cheatMessage
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode != Activity.RESULT_OK){
@@ -76,6 +110,8 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == REQUEST_CODE_CHEAT){
             quizViewModel.isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+            quizViewModel.availableCheats -= 1
+            cheatButtonstatus()
         }
     }
 
@@ -98,6 +134,10 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG,"onSaveInstanceState")
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+        /**
+         * Chapter 7 challenge 2
+         */
+        savedInstanceState.putInt(KEY_REMAINING_CHEATS, quizViewModel.availableCheats)
     }
 
     override fun onStop() {

@@ -10,6 +10,11 @@ class QuizViewModel: ViewModel() {
 
     var isCheater = false
 
+    /**
+     * Chapter 7 challenge 2
+     */
+    var availableCheats = 3
+
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
         Question(R.string.question_oceans, true),

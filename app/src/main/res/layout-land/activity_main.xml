@@ -31,12 +31,28 @@
             android:text="@string/false_button"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
+
+        <TextView
+            android:id="@+id/cheats_remaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text = "testing"
+            />
+
     <Button
         android:id="@+id/cheat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:text="@string/cheat_button"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/next_button"

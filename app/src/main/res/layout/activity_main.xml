@@ -31,6 +31,12 @@
             android:layout_height="wrap_content"
             android:text="@string/false_button"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/cheats_remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text = "testing"/>
 
     <Button
         android:id="@+id/cheat_button"
@@ -38,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/cheat_button"/>
+
 
     <Button
         android:id="@+id/next_button"
