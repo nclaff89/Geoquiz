@@ -1,7 +1,10 @@
 package com.bignerdranch.android.geoquiz
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,11 +26,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cheatButton: Button
     private lateinit var questionTextView: TextView
 
+    /**
+     * Chapter 7 challenge 1
+     */
+    private lateinit var apiLevelTV: TextView
+
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
 
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "OnCreate(Bundle?) called")
@@ -41,6 +50,16 @@ class MainActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.next_button)
         cheatButton = findViewById(R.id.cheat_button)
         questionTextView = findViewById(R.id.question_text_view)
+
+        /**
+         * Chapter 7 challenge 1
+         */
+        apiLevelTV = findViewById(R.id.api_show)
+        val apiMessage = resources.getString(R.string.api_level) +" ${Build.VERSION.SDK_INT}"
+        apiLevelTV.text = apiMessage
+
+
+
 
 
         trueButton.setOnClickListener { view: View ->
@@ -58,12 +77,21 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        cheatButton.setOnClickListener {
+        cheatButton.setOnClickListener {view ->
             //start cheat activity
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            startActivityForResult(intent, REQUEST_CODE_CHEAT)
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val options = ActivityOptions
+                    .makeClipRevealAnimation(view, 0, 0, view.width, view.height)
+                startActivityForResult(intent, REQUEST_CODE_CHEAT, options.toBundle())
+            }else{
+                startActivityForResult(intent, REQUEST_CODE_CHEAT)
+            }
         }
+
+
 
         updateQuestion()
     }

@@ -30,6 +30,12 @@
             android:layout_height="wrap_content"
             android:text="@string/false_button"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/api_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:layout_gravity="bottom|start"/>
 
     <Button
         android:id="@+id/cheat_button"
